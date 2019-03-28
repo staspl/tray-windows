@@ -1,4 +1,4 @@
-var edge = require('edge')
+var edge = require('edge-js')
 var extend = require('xtend')
 var EventEmitter = require('events').EventEmitter
 var icons = require('./icons')
