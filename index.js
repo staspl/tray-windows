@@ -1,13 +1,12 @@
-var edge = require('edge-js')
 var extend = require('xtend')
 var EventEmitter = require('events').EventEmitter
 var icons = require('./icons')
 var debug = require('debug')('tray-windows')
 var path = require('path')
 
-var raw = edge.func({source: path.resolve(__dirname, 'lib/tray.cs'), references: ['System.Drawing.dll','System.Windows.Forms.dll']})
+var raw = undefined; 
 
-function tray(opt, cb) {
+function tray(opt, cb, edge) {
   var ctx = new EventEmitter
   opt = opt || {}
   opt.icon = opt.icon || icons.grey()
@@ -73,6 +72,13 @@ function tray(opt, cb) {
   })
 
   try {
+	if ( typeof(raw) === "undefined" ) {
+		if ( typeof(edge) === "undefined" ) {
+			edge = require('edge-js');
+		}
+		raw = edge.func({source: path.resolve(__dirname, 'lib/tray.cs'), references: ['System.Drawing.dll','System.Windows.Forms.dll']})
+	}
+
     raw(args, function (err, r) {
       if (err) {
         ctx.emit('error', err)

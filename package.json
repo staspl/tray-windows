@@ -1,6 +1,6 @@
 {
   "name": "tray-windows",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "npm module to create system tray apps on Windows",
   "tags": [
     "tray",
